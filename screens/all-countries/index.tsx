@@ -46,8 +46,16 @@ export const AllCountriesScreen = () => {
           marginBottom: 20,
         }}
       >
-        <Button text={t("English")} onPress={() => changeLanguage("en")} />
-        <Button text={t("Spanish")} onPress={() => changeLanguage("es")} />
+        <Button
+          text={t("English")}
+          onPress={() => changeLanguage("en")}
+          testID="btn-en"
+        />
+        <Button
+          text={t("Spanish")}
+          onPress={() => changeLanguage("es")}
+          testID="btn-es"
+        />
       </View>
       <Text style={{ textAlign: "center", fontSize: 24, marginBottom: 20 }}>
         {t("countries_explorer")}
@@ -59,23 +67,28 @@ export const AllCountriesScreen = () => {
         value={searchText}
         label={t("search_by_name")}
         placeholder={t("search_placeholder")}
+        testID="search-input"
       />
 
       {/* LOADING OVERLAY (does not unmount component) */}
       {isLoading && (
         <View style={{ marginTop: 20, alignItems: "center" }}>
-          <ActivityIndicator size="large" />
+          <ActivityIndicator size="large" testID="loading-indicator" />
         </View>
       )}
 
       {/* ERROR MESSAGE (still keep screen mounted) */}
       {isError && (
-        <View style={{ marginTop: 20, alignItems: "center", gap: 20 }}>
+        <View
+          style={{ marginTop: 20, alignItems: "center", gap: 20 }}
+          testID="error-message"
+        >
           <Text>{t("error")}</Text>
           <Button
             text={t("retry")}
             onPress={() => refetch()}
             disabled={isLoading}
+            testID="retry-btn"
           />
         </View>
       )}
@@ -107,11 +120,13 @@ export const AllCountriesScreen = () => {
                   text={t("previous")}
                   disabled={currentPage === 0}
                   onPress={() => setCurrentPage((p) => Math.max(p - 1, 0))}
+                  testID="btn-previous"
                 />
 
                 <Button
                   text={t("next")}
                   onPress={() => setCurrentPage((p) => p + 1)}
+                  testID="btn-next"
                 />
               </View>
             </View>
