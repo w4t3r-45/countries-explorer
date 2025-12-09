@@ -106,6 +106,7 @@ export const AllCountriesScreen = () => {
             />
           </>
         )}
+        keyExtractor={(item) => item.name.common}
       />
     </View>
   );
