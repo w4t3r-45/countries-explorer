@@ -1,0 +1,17 @@
+{
+  "greeting": "Hello",
+  "countries": "Countries",
+  "search_placeholder": "Search countries...",
+  "loading": "Loading...",
+  "error": "Error fetching data",
+  "retry": "Retry",
+  "previous": "Previous",
+  "next": "Next",
+  "no_results": "No results found",
+  "country_details": "Country Details",
+  "capital": "Capital:",
+  "region": "Region:",
+  "population": "Population:",
+  "countries_explorer": "Countries Explorer",
+  "search_by_name": "Search by name"
+}

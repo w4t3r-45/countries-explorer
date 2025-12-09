@@ -1,0 +1,17 @@
+{
+  "greeting": "Hola",
+  "countries": "Países",
+  "search_placeholder": "Buscar países...",
+  "loading": "Cargando...",
+  "error": "Error al cargar los datos",
+  "retry": "Reintentar",
+  "previous": "Anterior",
+  "next": "Siguiente",
+  "no_results": "No se encontraron resultados",
+  "country_details": "Detalles del país",
+  "capital": "Capital:",
+  "region": "Región:",
+  "population": "Población:",
+  "countries_explorer": "Explorador de países",
+  "search_by_name": "Buscar por nombre"
+}

@@ -1,9 +1,11 @@
 import { Button } from "@/components/Atomic";
 import { useGetCountryByName } from "@/hooks/api/useCountries";
 import { useGlobalSearchParams } from "expo-router";
+import { useTranslation } from "react-i18next";
 import { ActivityIndicator, Image, ScrollView, Text, View } from "react-native";
 
 export const CountryDetailsScreen = () => {
+  const { t } = useTranslation();
   const { id } = useGlobalSearchParams<{ id: string }>();
 
   const { data, isError, isLoading, refetch } = useGetCountryByName(id);
@@ -16,7 +18,7 @@ export const CountryDetailsScreen = () => {
       contentContainerStyle={{ paddingBottom: 40 }}
     >
       <Text style={{ textAlign: "center", fontSize: 24, marginBottom: 20 }}>
-        Country Details
+        {t("country_details")}
       </Text>
 
       {/* LOADING */}
@@ -30,7 +32,11 @@ export const CountryDetailsScreen = () => {
       {isError && (
         <View style={{ marginTop: 20, alignItems: "center", gap: 20 }}>
           <Text>Error loading data</Text>
-          <Button text="Retry" onPress={() => refetch()} disabled={isLoading} />
+          <Button
+            text={t("retry")}
+            onPress={() => refetch()}
+            disabled={isLoading}
+          />
         </View>
       )}
 
@@ -56,18 +62,19 @@ export const CountryDetailsScreen = () => {
 
           {/* CAPITAL */}
           <Text style={{ fontSize: 16 }}>
-            <Text style={{ fontWeight: "bold" }}>Capital:</Text>{" "}
+            <Text style={{ fontWeight: "bold" }}>{t("capital")}</Text>{" "}
             {country.capital[0]}
           </Text>
 
           {/* REGION */}
           <Text style={{ fontSize: 16 }}>
-            <Text style={{ fontWeight: "bold" }}>Region:</Text> {country.region}
+            <Text style={{ fontWeight: "bold" }}>{t("region")}</Text>{" "}
+            {country.region}
           </Text>
 
           {/* POPULATION */}
           <Text style={{ fontSize: 16 }}>
-            <Text style={{ fontWeight: "bold" }}>Population:</Text>{" "}
+            <Text style={{ fontWeight: "bold" }}>{t("population")}</Text>{" "}
             {country.population.toLocaleString()}
           </Text>
         </View>
