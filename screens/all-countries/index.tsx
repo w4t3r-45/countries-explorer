@@ -3,14 +3,18 @@ import { CountryCard } from "@/components/FeatureRelated/all-countries/country-c
 import { useGetAllCountries } from "@/hooks/api/useCountries";
 import { MAX_PER_PAGE } from "@/utils/constants";
 
+import { changeLanguage } from "@/utils/i18n";
 import debounce from "lodash.debounce";
 import { useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { ActivityIndicator, FlatList, Text, View } from "react-native";
 
 export const AllCountriesScreen = () => {
   const [searchText, setSearchText] = useState("");
   const [debouncedValue, setDebouncedValue] = useState("");
   const [currentPage, setCurrentPage] = useState(0);
+
+  const { t } = useTranslation();
 
   const debouncedSearch = useMemo(
     () =>
@@ -34,16 +38,27 @@ export const AllCountriesScreen = () => {
 
   return (
     <View style={{ flex: 1, marginHorizontal: 16, paddingTop: 16 }}>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-around",
+          marginBottom: 20,
+        }}
+      >
+        <Button text={t("English")} onPress={() => changeLanguage("en")} />
+        <Button text={t("Spanish")} onPress={() => changeLanguage("es")} />
+      </View>
       <Text style={{ textAlign: "center", fontSize: 24, marginBottom: 20 }}>
-        Countries Explorer
+        {t("countries_explorer")}
       </Text>
 
       {/* SEARCH FIELD */}
       <TextField
         onChangeText={handleSearchChange}
         value={searchText}
-        label="Search by Name"
-        placeholder="Algeria..."
+        label={t("search_by_name")}
+        placeholder={t("search_placeholder")}
       />
 
       {/* LOADING OVERLAY (does not unmount component) */}
@@ -56,8 +71,12 @@ export const AllCountriesScreen = () => {
       {/* ERROR MESSAGE (still keep screen mounted) */}
       {isError && (
         <View style={{ marginTop: 20, alignItems: "center", gap: 20 }}>
-          <Text>Error loading data</Text>
-          <Button text="Retry" onPress={() => refetch()} disabled={isLoading} />
+          <Text>{t("error")}</Text>
+          <Button
+            text={t("retry")}
+            onPress={() => refetch()}
+            disabled={isLoading}
+          />
         </View>
       )}
 
@@ -69,7 +88,7 @@ export const AllCountriesScreen = () => {
         ListEmptyComponent={() =>
           !isLoading && !isFetching ? (
             <Text style={{ textAlign: "center", marginTop: 20 }}>
-              No results found
+              {t("no_results")}
             </Text>
           ) : null
         }
@@ -85,13 +104,13 @@ export const AllCountriesScreen = () => {
                 }}
               >
                 <Button
-                  text="Previous"
+                  text={t("previous")}
                   disabled={currentPage === 0}
                   onPress={() => setCurrentPage((p) => Math.max(p - 1, 0))}
                 />
 
                 <Button
-                  text="Next"
+                  text={t("next")}
                   onPress={() => setCurrentPage((p) => p + 1)}
                 />
               </View>
