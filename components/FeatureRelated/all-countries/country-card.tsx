@@ -17,6 +17,7 @@ const CountryCardComponent: FC<CountryCardProps> = ({ country }) => {
     <Pressable
       style={styles.card}
       onPress={() => router.navigate(`/country/${name.common}`)}
+      testID={`country-card-${country.name.common}`}
     >
       <Image
         source={{ uri: flags.png }}

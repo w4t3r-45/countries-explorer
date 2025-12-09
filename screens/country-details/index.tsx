@@ -36,6 +36,7 @@ export const CountryDetailsScreen = () => {
             text={t("retry")}
             onPress={() => refetch()}
             disabled={isLoading}
+            testID="retry-btn"
           />
         </View>
       )}

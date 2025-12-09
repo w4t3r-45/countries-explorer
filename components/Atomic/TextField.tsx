@@ -12,6 +12,7 @@ type TextFieldProps = {
   placeholder?: string;
   value: string;
   onChangeText: (text: string) => void;
+  testID?: string;
 };
 
 export const TextField: FC<TextFieldProps> = ({
@@ -19,9 +20,10 @@ export const TextField: FC<TextFieldProps> = ({
   placeholder,
   value,
   onChangeText,
+  testID,
 }) => {
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID={testID}>
       {label ? <Text style={styles.label}>{label}</Text> : null}
 
       <View style={styles.inputWrapper}>

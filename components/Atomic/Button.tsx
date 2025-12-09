@@ -5,23 +5,27 @@ type ButtonProps = {
   text: string;
   onPress: () => void;
   disabled?: boolean;
+  testID?: string;
 };
 
-export const Button: FC<ButtonProps> = memo(({ text, onPress, disabled }) => {
-  return (
-    <Pressable
-      onPress={onPress}
-      disabled={disabled}
-      style={({ pressed }) => [
-        styles.button,
-        pressed && styles.pressed,
-        disabled && styles.disabled,
-      ]}
-    >
-      <Text style={styles.text}>{text}</Text>
-    </Pressable>
-  );
-});
+export const Button: FC<ButtonProps> = memo(
+  ({ text, onPress, disabled, testID }) => {
+    return (
+      <Pressable
+        onPress={onPress}
+        disabled={disabled}
+        style={({ pressed }) => [
+          styles.button,
+          pressed && styles.pressed,
+          disabled && styles.disabled,
+        ]}
+        testID={testID || "button-pressable"}
+      >
+        <Text style={styles.text}>{text}</Text>
+      </Pressable>
+    );
+  }
+);
 
 const styles = StyleSheet.create({
   button: {
