@@ -1,6 +1,7 @@
 import { Country } from "@/types/types";
+import { router } from "expo-router";
 import React, { FC, memo, useMemo } from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, StyleSheet, Text, View } from "react-native";
 
 type CountryCardProps = {
   country: Country;
@@ -13,7 +14,10 @@ const CountryCardComponent: FC<CountryCardProps> = ({ country }) => {
   const capitalText = useMemo(() => capital?.join(", "), [capital]);
 
   return (
-    <View style={styles.card}>
+    <Pressable
+      style={styles.card}
+      onPress={() => router.navigate(`/country/${name.common}`)}
+    >
       <Image
         source={{ uri: flags.png }}
         style={styles.flag}
@@ -36,7 +40,7 @@ const CountryCardComponent: FC<CountryCardProps> = ({ country }) => {
           Region: <Text style={styles.value}>{region}</Text>
         </Text>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
