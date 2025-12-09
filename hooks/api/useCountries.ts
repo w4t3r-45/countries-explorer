@@ -1,11 +1,29 @@
 import { getCountries, getCountryByName } from "@/services/countries.service";
+import { Country } from "@/types/types";
 import { REACT_QUERY_KEYS } from "@/utils/constants";
 import { useQuery } from "@tanstack/react-query";
 
-export const useGetAllCountries = () => {
-  return useQuery({
-    queryKey: [REACT_QUERY_KEYS.COUNTRIES],
-    queryFn: () => getCountries(),
+export const useGetAllCountries = (
+  page: number,
+  pageSize: number,
+  search: string
+) => {
+  return useQuery<Country[], Error>({
+    queryKey: [REACT_QUERY_KEYS.COUNTRIES, search, page],
+    queryFn: getCountries,
+
+    select: (data) => {
+      const filtered = search
+        ? data.filter((country) =>
+            country.name.common.toLowerCase().includes(search.toLowerCase())
+          )
+        : data;
+
+      const start = page * pageSize;
+      const end = start + pageSize;
+
+      return filtered.slice(start, end);
+    },
   });
 };
 
